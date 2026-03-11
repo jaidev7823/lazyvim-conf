@@ -1,6 +1,6 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
-
+require("matugen.colors")()
 _G.LazyVim = require("lazyvim.util")
 
 ---@class LazyVimConfig: LazyVimOptions
@@ -425,3 +425,4 @@ setmetatable(M, {
 })
 
 return M
+
