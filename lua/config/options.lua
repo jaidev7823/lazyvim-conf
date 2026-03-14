@@ -3,3 +3,4 @@
 -- Add any additional options here
 vim.g.colorscheme = "kanagawa"
 vim.g.lazyvim_picker = "telescope"
+vim.opt.swapfile = false
