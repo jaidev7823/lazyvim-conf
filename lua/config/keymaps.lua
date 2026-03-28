@@ -9,6 +9,18 @@ local map = LazyVim.safe_keymap_set
 
 --My Cnnf--
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree focus<CR>", { desc = "Focus Explorer" })
+vim.keymap.set("n", "<leader>fp", function()
+  -- Get the relative path
+  local path = vim.fn.expand("%")
+  -- Get the comment format for the current file type (e.g., "// %s" or "# %s")
+  local cs = vim.bo.commentstring
+  -- Fallback to a simple format if commentstring is empty
+  local comment = (cs == "" and "%s") or cs
+  local formatted = comment:format(path)
+
+  -- Insert at the very top of the file
+  vim.api.nvim_buf_set_lines(0, 0, 0, false, { formatted })
+end, { desc = "Insert relative path at top" })
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })

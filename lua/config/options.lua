@@ -1,6 +1,12 @@
 -- Options are automatically loaded before lazy.nvim startup
--- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
--- Add any additional options here
 vim.g.colorscheme = "kanagawa"
 vim.g.lazyvim_picker = "telescope"
-vim.opt.swapfile = false
+
+vim.g.autoformat = false
+-- Use local state directory for persistent data (Nix-friendly)
+local data_dir = vim.fn.stdpath("state")
+
+vim.opt.swapfile = false -- Kill the .swp nagging entirely
+vim.opt.undofile = true -- Keep undo history (better than swap files)
+vim.opt.undodir = data_dir .. "/undo//"
+vim.opt.directory = data_dir .. "/swap//"
