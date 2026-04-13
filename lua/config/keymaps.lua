@@ -9,18 +9,24 @@ local map = LazyVim.safe_keymap_set
 
 --My Cnnf--
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree focus<CR>", { desc = "Focus Explorer" })
+
+--Add path in top of file--
 vim.keymap.set("n", "<leader>fp", function()
-  -- Get the relative path
   local path = vim.fn.expand("%")
-  -- Get the comment format for the current file type (e.g., "// %s" or "# %s")
   local cs = vim.bo.commentstring
-  -- Fallback to a simple format if commentstring is empty
   local comment = (cs == "" and "%s") or cs
   local formatted = comment:format(path)
-
-  -- Insert at the very top of the file
   vim.api.nvim_buf_set_lines(0, 0, 0, false, { formatted })
 end, { desc = "Insert relative path at top" })
+
+--Paste on the line current line shift to second line--
+vim.keymap.set("n", "p", "O<Esc>p", { desc = "Paste on new line above" })
+
+-- Delete without copying to clipboard
+vim.keymap.set({"n", "v"}, "d", '"_d', { desc = "Delete (no copy)" })
+
+-- Shift + D (D) now cuts and copies (standard 'd' behavior)
+vim.keymap.set({"n", "v"}, "D", 'd', { desc = "Cut and copy" })
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
